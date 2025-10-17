@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stage_o_hng/utilities/app_text.dart';
 import 'package:stage_o_hng/utilities/app_theme.dart';
 import 'package:stage_o_hng/utilities/assets_path.dart';
+import 'package:stage_o_hng/utilities/title.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -16,7 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   List<bool>? isSelected;
 
-  final List _screens = const [About(), ContactInfo()];
+  final List _screens = const [_About(), _ContactInfo()];
 
   @override
   void initState() {
@@ -80,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Container(
                   height: 150.0,
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(shape: BoxShape.circle),
+                  decoration: BoxDecoration(shape: BoxShape.circle,),
                   child: Image.asset(AssetsPath.avatar),
                 ),
               ),
@@ -116,71 +116,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class About extends StatelessWidget {
-  const About({super.key});
+class _About extends StatelessWidget {
+  const _About({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Title(title: 'Name', subtitle: 'Ayodele Gabriel Adeleye'),
-        Title(title: 'Occupation', subtitle: 'Flutter Developer'),
-        Title(
+        TitleWidget(title: 'Name', subtitle: 'Ayodele Gabriel Adeleye'),
+        TitleWidget(title: 'Occupation', subtitle: 'Flutter Developer'),
+        TitleWidget(
           title: 'Hobbies',
           subtitle: 'Travelling, Reading, Binge watching, Listening to music, Eating',
         ),
-        Title(title: 'Fun Fact', subtitle: 'Loves dry jokes and the colour green'),
+        TitleWidget(title: 'Fun Fact', subtitle: 'Loves dry jokes and the colour green'),
       ],
     );
   }
 }
 
-class ContactInfo extends StatelessWidget {
-  const ContactInfo({super.key});
+class _ContactInfo extends StatelessWidget {
+  const _ContactInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Title(title: 'Phone', subtitle: '+2347060974828', color: true),
-        Title(title: 'Email', subtitle: 'gabemandev@gmail.com', color: true),
-        Title(title: 'X', subtitle: 'https://x.com/Gab_Ayodele', color: true),
-        Title(
+        TitleWidget(title: 'Phone', subtitle: '+2347060974828', color: true),
+        TitleWidget(title: 'Email', subtitle: 'gabemandev@gmail.com', color: true),
+        TitleWidget(title: 'X', subtitle: 'https://x.com/Gab_Ayodele', color: true),
+        TitleWidget(
           title: 'LinkedIn',
           subtitle: 'https://www.linkedin.com/in/gabriel-ayodele-8a48101b3/',
           color: true,
         ),
-        Title(title: 'GitHub', subtitle: 'https://github.com/Ayodele-Gabriel', color: true),
+        TitleWidget(title: 'GitHub', subtitle: 'https://github.com/Ayodele-Gabriel', color: true),
       ],
     );
   }
 }
 
-class Title extends StatelessWidget {
-  const Title({super.key, required this.title, this.color, this.subtitle});
 
-  final String title;
-  final bool? color;
-  final String? subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title, style: kTitle),
-      subtitle:
-          subtitle != null
-              ? color == true
-                  ? SelectableText(
-                    subtitle!,
-                    style: kSubtitle.copyWith(color: color == true ? Colors.blueAccent : null),
-                  )
-                  : Text(
-                    subtitle!,
-                    style: kSubtitle.copyWith(color: color == true ? Colors.blueAccent : null),
-                  )
-              : null,
-    );
-  }
-}
